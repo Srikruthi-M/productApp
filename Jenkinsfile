@@ -8,6 +8,8 @@ pipeline {
 
     environment {
         DOCKERHUB_REPO = "kruthim/product-app"
+        DOCKERHUB_USER = "kruthim"
+        DOCKERHUB_PASS = "Sai.muth@12"
     }
 
     stages {
@@ -24,6 +26,11 @@ pipeline {
             }
         }
 
+        stage('Docker Login') {
+            steps {
+                bat "docker login -u %DOCKERHUB_USER% -p %DOCKERHUB_PASS%"
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
